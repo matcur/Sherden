@@ -14,19 +14,10 @@ namespace Sherden
             var shedule1 = new Shedule(
                 new Start(
                     new Repeat(
-                        new Delay(
+                        new Try(
                             new Message("hi"),
-                            5000
+                            3
                         ),
-                        TimeSpan.FromSeconds(1)
-                    ),
-                    DateTime.Now.AddSeconds(1)
-                )
-            );
-            var shedule2 = new Shedule(
-                new Start(
-                    new Repeat(
-                        new Message("farewell"),
                         TimeSpan.FromSeconds(1)
                     ),
                     DateTime.Now.AddSeconds(1)
@@ -34,7 +25,7 @@ namespace Sherden
             );
 
             new JobQueue(
-                new List<Shedule> { shedule1, shedule2 }   
+                new List<Shedule> { shedule1 }   
             ).Run();
 
             Console.ReadKey();
@@ -52,6 +43,9 @@ namespace Sherden
 
         public void Execute()
         {
+            if (new Random().Next(3) == 0)
+                throw new Exception("fuck");
+
             Console.WriteLine(value);
         }
     }
