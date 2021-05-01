@@ -20,14 +20,14 @@ namespace Sherden.Obstacles
             this.timeout = timeout;
         }
 
-        public async override void Activate()
+        public override void Activate()
         {
             while (true)
             {
+                Thread.Sleep(timeout);
+
                 job.Execute();
                 next.Activate();
-
-                await Task.Delay(timeout);
             }
         }
     }

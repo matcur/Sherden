@@ -14,7 +14,10 @@ namespace Sherden
             var shedule1 = new Shedule(
                 new Start(
                     new Repeat(
-                        new Message("hi"),
+                        new Delay(
+                            new Message("hi"),
+                            5000
+                        ),
                         TimeSpan.FromSeconds(1)
                     ),
                     DateTime.Now.AddSeconds(1)
