@@ -8,23 +8,23 @@ namespace Sherden.Obstacles
 {
     public class Delay : Obstacle
     {
-        private readonly int milliseconds;
+        private readonly int seconds;
 
-        public Delay(Obstacle next, int milliseconds)
+        public Delay(Obstacle next, int seconds)
         {
             this.next = next;
-            this.milliseconds = milliseconds;
+            this.seconds = seconds;
         }
 
-        public Delay(Job job, int milliseconds)
+        public Delay(Job job, int seconds)
         {
             this.job = job;
-            this.milliseconds = milliseconds;
+            this.seconds = seconds;
         }
 
         public override void Activate()
         {
-            Thread.Sleep(milliseconds);
+            Thread.Sleep(seconds * 1000);
 
             job.Execute();
             next.Activate();

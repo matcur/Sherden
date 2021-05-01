@@ -18,7 +18,7 @@ namespace Sherden
                             new Message("hi"),
                             3
                         ),
-                        TimeSpan.FromSeconds(1)
+                        1
                     ),
                     DateTime.Now.AddSeconds(1)
                 )

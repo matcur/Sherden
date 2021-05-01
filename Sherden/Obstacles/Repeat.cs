@@ -6,25 +6,25 @@ namespace Sherden.Obstacles
 {
     public class Repeat : Obstacle
     {
-        private readonly TimeSpan timeout;
+        private readonly int timeoutSeconds;
 
-        public Repeat(Job job, TimeSpan timeout)
+        public Repeat(Job job, int timeoutSeconds)
         {
             this.job = job;
-            this.timeout = timeout;
+            this.timeoutSeconds = timeoutSeconds;
         }
 
-        public Repeat(Obstacle next, TimeSpan timeout)
+        public Repeat(Obstacle next, int timeoutSeconds)
         {
             this.next = next;
-            this.timeout = timeout;
+            this.timeoutSeconds = timeoutSeconds;
         }
 
         public override void Activate()
         {
             while (true)
             {
-                Thread.Sleep(timeout);
+                Thread.Sleep(timeoutSeconds * 1000);
 
                 job.Execute();
                 next.Activate();

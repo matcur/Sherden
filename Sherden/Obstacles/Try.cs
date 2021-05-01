@@ -9,20 +9,20 @@ namespace Sherden.Obstacles
     {
         private readonly int count;
 
-        private readonly int timeout;
+        private readonly int timeoutSeconds;
 
-        public Try(Obstacle next, int count, int timeout = 0)
+        public Try(Obstacle next, int count, int timeoutSeconds = 0)
         {
             this.next = next;
             this.count = count;
-            this.timeout = timeout;
+            this.timeoutSeconds = timeoutSeconds;
         }
 
-        public Try(Job job, int count, int timeout = 0)
+        public Try(Job job, int count, int timeoutSeconds = 0)
         {
             this.job = job;
             this.count = count;
-            this.timeout = timeout;
+            this.timeoutSeconds = timeoutSeconds;
         }
 
         public override void Activate()
@@ -37,8 +37,7 @@ namespace Sherden.Obstacles
                 }
                 catch(Exception e)
                 {
-                    Console.WriteLine("handle error");
-                    Thread.Sleep(timeout);
+                    Thread.Sleep(timeoutSeconds * 1000);
 
                     if (@try == count)
                         throw e;
