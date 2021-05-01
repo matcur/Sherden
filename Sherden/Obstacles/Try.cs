@@ -34,6 +34,8 @@ namespace Sherden.Obstacles
                 {
                     job.Execute();
                     next.Activate();
+
+                    return;
                 }
                 catch(Exception e)
                 {
