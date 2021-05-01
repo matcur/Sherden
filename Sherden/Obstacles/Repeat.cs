@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Sherden.Obstacles
 {
@@ -19,14 +20,14 @@ namespace Sherden.Obstacles
             this.timeout = timeout;
         }
 
-        public override void Activate()
+        public async override void Activate()
         {
             while (true)
             {
                 job.Execute();
                 next.Activate();
 
-                Thread.Sleep(timeout);
+                await Task.Delay(timeout);
             }
         }
     }

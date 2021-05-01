@@ -20,12 +20,12 @@ namespace Sherden.Obstacles
             this.time = time;
         }
 
-        public override void Activate()
+        public async override void Activate()
         {
             var time = (this.time - DateTime.Now).TotalMilliseconds;
             var delay = Math.Max(time, 0);
 
-            Thread.Sleep((int)delay);
+            await Task.Delay((int)delay);
 
             job.Execute();
             next.Activate();
