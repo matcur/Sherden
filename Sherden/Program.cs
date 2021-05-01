@@ -17,10 +17,8 @@ namespace Sherden
                         new Try(
                             new Message("hi"),
                             3
-                        ),
-                        1
-                    ),
-                    DateTime.Now.AddSeconds(1)
+                        ), 1
+                    ), DateTime.Now.AddSeconds(1)
                 )
             );
 
