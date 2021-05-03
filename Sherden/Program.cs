@@ -1,4 +1,5 @@
 ﻿using Sherden.Obstacles;
+using Sherden.Obstacles.Cronning;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,13 +13,10 @@ namespace Sherden
         {
             Console.WriteLine("start");
             var shedule1 = new Shedule(
-                new Start(
-                    new Repeat(
-                        new Try(
-                            new Message("hi"),
-                            3
-                        ), 1
-                    ), DateTime.Now.AddSeconds(1)
+                new Cron(
+                    new Message("hi"),
+                    // s m h dow M dom y
+                    "* 49 * ? * *"
                 )
             );
 
@@ -41,9 +39,6 @@ namespace Sherden
 
         public void Execute()
         {
-            if (new Random().Next(3) == 0)
-                throw new Exception("fuck");
-
             Console.WriteLine(value);
         }
     }
