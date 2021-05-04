@@ -14,31 +14,33 @@ namespace Sherden.Obstacles.Cronning.Date
             {
                 var stringMinute = SplittedRule[RulePosition];
                 if (stringMinute == "*")
-                    return PrepareResult(Now.Minute);
+                {
+                    var result = Now.Minute;
+                    if (IsSecondOver())
+                        result = Now.AddMinutes(1).Minute;
 
-                int minute;
-                if (!int.TryParse(stringMinute, out minute))
-                    throw new ArgumentException($"Second must be number or *, [{stringMinute}] given");
+                    return result;
+                }
 
-                return PrepareResult(minute);
+                return TryParse(stringMinute);
             }
         }
 
         public Minute(string rule) : base(rule) { }
 
-        public bool IsSecondOver(int minute)
+        public bool IsSecondOver()
         {
-            return new Second(rule).Value < Now.Second
-                 && Now.Minute >= minute;
+            return new Second(rule).Value <= Now.Second;
         }
 
-        private int PrepareResult(int minute)
+        private int TryParse(string stringMinute)
         {
+            int minute;
+            if (!int.TryParse(stringMinute, out minute))
+                throw new ArgumentException($"Second must be number or *, [{stringMinute}] given");
+
             if (minute > 60 || minute < 0)
                 throw new ArgumentException($"Second must be between [0, 60], [{minute}] given");
-
-            if (IsSecondOver(minute))
-                minute++;
 
             return minute;
         }
