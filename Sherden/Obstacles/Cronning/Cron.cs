@@ -25,7 +25,7 @@ namespace Sherden.Obstacles.Cronning
         {
             while (true)
             {
-                var milliseconds = expression.Time.TotalMilliseconds;
+                var milliseconds = expression.ActivateTime.TotalMilliseconds;
                 Console.WriteLine(milliseconds);
                 Thread.Sleep(Math.Max((int)milliseconds, 0));
 

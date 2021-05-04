@@ -8,7 +8,7 @@ namespace Sherden.Obstacles.Cronning
 {
     class CronExpression
     {
-        public TimeSpan Time => ActivateDate.AddMilliseconds(999) - DateTime.Now;
+        public TimeSpan ActivateTime => ActivateDate.AddMilliseconds(999) - DateTime.Now;
 
         public DateTime ActivateDate
         {
