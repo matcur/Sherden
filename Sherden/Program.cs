@@ -1,5 +1,6 @@
 ﻿using Sherden.Obstacles;
 using Sherden.Obstacles.Cronning;
+using Sherden.Schedules;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,7 +19,7 @@ namespace Sherden
             // s m h dow M dom y
             var cron = $"{s} {m} 1 ? * *";
             Console.WriteLine(cron);
-            var shedule1 = new Shedule(
+            var schedule = new SimpleSchedule(
                 new Cron(
                     new Message("hi"),
                     cron
@@ -26,7 +27,7 @@ namespace Sherden
             );
 
             new JobQueue(
-                new List<Shedule> { shedule1 }   
+                new List<SimpleSchedule> { schedule }   
             ).Run();
 
             Console.ReadKey();

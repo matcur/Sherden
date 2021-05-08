@@ -1,30 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using Sherden.Schedules;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Sherden
 {
     public class JobQueue
     {
-        public IEnumerable<Shedule> Shedules { get; }
+        private IEnumerable<Schedule> schedules;
 
-        public JobQueue(Shedule shedule)
+        public JobQueue(Schedule schedule)
         {
-            Shedules = new List<Shedule>{ shedule };
+            schedules = new List<Schedule> { schedule };
         }
 
-        public JobQueue(IEnumerable<Shedule> shedules)
+        public JobQueue(IEnumerable<Schedule> shedules)
         {
-            Shedules = shedules;
+            schedules = shedules;
         }
 
         public Task Run()
         {
             return Task.Run(() =>
             {
-                foreach (var shedule in Shedules)
-                {
-                    shedule.Start();
-                }
+                foreach (var schedule in schedules)
+                    schedule.Execute();
             });
         }
     }
