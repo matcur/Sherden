@@ -30,8 +30,7 @@ namespace Sherden.Obstacles.Cronning.Date
 
         public bool IsMinuteOver()
         {
-            return new Minute(rule).Value <= Now.Minute
-                && new Second(rule).Value <= Now.Second;
+            return new Minute(rule).Value <= Now.Minute;
         }
 
         private int TryParse(string stringHour)

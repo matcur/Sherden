@@ -26,9 +26,7 @@ namespace Sherden.Obstacles.Cronning.Date
 
         public bool IsHourOver()
         {
-            return new Hour(rule).Value <= Now.Hour &&
-                   new Minute(rule).Value <= Now.Minute &&
-                   new Second(rule).Value <= Now.Second;
+            return new Hour(rule).Value <= Now.Hour;
         }
     }
 }

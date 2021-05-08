@@ -30,10 +30,7 @@ namespace Sherden.Obstacles.Cronning.Date
 
         public bool IsDayOver()
         {
-            return new Day(rule).Value <= Now.Day &&
-                   new Hour(rule).Value <= Now.Hour &&
-                   new Minute(rule).Value <= Now.Minute &&
-                   new Second(rule).Value <= Now.Second;
+            return new Day(rule).Value <= Now.Day;
         }
 
         private int TryParse(string stringMounth)
