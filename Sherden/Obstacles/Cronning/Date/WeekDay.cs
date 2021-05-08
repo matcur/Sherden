@@ -10,16 +10,17 @@ namespace Sherden.Obstacles.Cronning.Date
         {
             get
             {
-                if (!HasPosition())
-                    throw new ArgumentException("Day of week must be set");
-
                 var stringDay = SplittedRule[RulePosition];
                 if (stringDay == "*" || stringDay == "?")
-                    return PrepareResult(Now.Day);
+                {
+                    var result = Now.Day;
+                    if (IsHourOver())
+                        result = Now.AddDays(1).Day;
 
-                var closeWeekDayDate = ParseCloseDateByWeekDay(stringDay);
+                    return result;
+                }
 
-                return PrepareResult(closeWeekDayDate.Day);
+                return ParseCloseDate(stringDay).Day;
             }
         }
 
@@ -31,7 +32,7 @@ namespace Sherden.Obstacles.Cronning.Date
                 && SplittedRule[RulePosition] != "?";
         }
 
-        public DateTime ParseCloseDateByWeekDay(string stringDay)
+        private DateTime ParseCloseDate(string stringDay)
         {
             DayOfWeek day;
             if (!Enum.TryParse(stringDay, out day))
@@ -42,14 +43,6 @@ namespace Sherden.Obstacles.Cronning.Date
                 result = result.AddDays(1);
 
             return result;
-        }
-
-        private int PrepareResult(int day)
-        {
-            if (IsHourOver(day))
-                day += 7;
-
-            return day;
         }
     }
 }

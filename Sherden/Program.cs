@@ -11,15 +11,16 @@ namespace Sherden
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("start");
+            Console.WriteLine(DateTime.Now);
+
             var s = DateTime.Now.AddSeconds(10).Second;
             var m = DateTime.Now.Minute;
-            var cron = $"{s} {m} * ? * *";
+            // s m h dow M dom y
+            var cron = $"{s} {m} 1 ? * *";
             Console.WriteLine(cron);
             var shedule1 = new Shedule(
                 new Cron(
                     new Message("hi"),
-                    // s m h dow M dom y
                     cron
                 )
             );

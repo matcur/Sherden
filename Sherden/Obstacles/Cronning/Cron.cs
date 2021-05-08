@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Sherden.Obstacles.Cronning
 {
@@ -21,13 +22,13 @@ namespace Sherden.Obstacles.Cronning
             this.expression = new CronExpression(rule);
         }
 
-        public override void Activate()
+        public async override void Activate()
         {
             while (true)
             {
                 var milliseconds = expression.ActivateTime.TotalMilliseconds;
                 Console.WriteLine(milliseconds);
-                Thread.Sleep(Math.Max((int)milliseconds, 0));
+                await Task.Delay((int)milliseconds);
 
                 job.Execute();
                 next.Activate();

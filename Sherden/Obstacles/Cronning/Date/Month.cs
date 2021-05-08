@@ -14,19 +14,38 @@ namespace Sherden.Obstacles.Cronning.Date
             {
                 var stringMounth = SplittedRule[RulePosition];
                 if (stringMounth == "*")
-                    return DateTime.Now.Month;
+                {
+                    var result = Now.Month;
+                    if (IsDayOver())
+                        result = Now.AddMonths(1).Month;
 
-                int mounth;
-                if (!int.TryParse(stringMounth, out mounth))
-                    throw new ArgumentException($"Month must be number or *, [{stringMounth}] given");
+                    return result;
+                }
 
-                if (mounth > 12 || mounth < 1)
-                    throw new ArgumentException($"Month must be between [1, 12], [{mounth}] given");
-
-                return mounth;
+                return TryParse(stringMounth);
             }
         }
 
         public Month(string rule) : base(rule) { }
+
+        public bool IsDayOver()
+        {
+            return new Day(rule).Value <= Now.Day &&
+                   new Hour(rule).Value <= Now.Hour &&
+                   new Minute(rule).Value <= Now.Minute &&
+                   new Second(rule).Value <= Now.Second;
+        }
+
+        private int TryParse(string stringMounth)
+        {
+            int mounth;
+            if (!int.TryParse(stringMounth, out mounth))
+                throw new ArgumentException($"Month must be number or *, [{stringMounth}] given");
+
+            if (mounth > 12 || mounth < 1)
+                throw new ArgumentException($"Month must be between [1, 12], [{mounth}] given");
+
+            return mounth;
+        }
     }
 }

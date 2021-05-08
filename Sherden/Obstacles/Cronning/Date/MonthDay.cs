@@ -12,23 +12,18 @@ namespace Sherden.Obstacles.Cronning.Date
         {
             get
             {
-                if (!HasPosition())
-                    throw new ArgumentException("Day of month must be set");
-
                 var stringDay = SplittedRule[RulePosition];
-                if (stringDay == "*")
-                    return DateTime.Now.Day;
-
-                int day;
-                if (!int.TryParse(stringDay, out day))
-                    throw new ArgumentException($"Day must be number or *, [{stringDay}] given");
-
-                if (IsHourOver(day))
+                if (stringDay == "*" || stringDay == "?")
                 {
-                    day++;
+                    var result = Now.Day;
+                    if (IsHourOver())
+                        result = Now.AddDays(1).Day;
+
+                    return result;
                 }
 
-                return day;
+
+                return TryParse(stringDay);
             }
         }
 
@@ -38,6 +33,15 @@ namespace Sherden.Obstacles.Cronning.Date
         {
             return SplittedRule.Length > RulePosition
                 && SplittedRule[RulePosition] != "?";
+        }
+
+        private int TryParse(string stringDay)
+        {
+            int day;
+            if (!int.TryParse(stringDay, out day))
+                throw new ArgumentException($"Day must be number or *, [{stringDay}] given");
+
+            return day;
         }
     }
 }

@@ -18,13 +18,18 @@ namespace Sherden.Obstacles.Cronning
                 if (rule.Split(' ').Length < 6)
                     throw new ArgumentException("S, M, H, (DOW or DOM), M is required");
 
-                int value = new Hour(rule).Value;
-                int value1 = new Minute(rule).Value;
-                int value2 = new Second(rule).Value;
+                int value = new Year(rule).Value;
+                int value1 = new Month(rule).Value;
+                int value2 = new Day(rule).Value;
+                int value3 = new Hour(rule).Value;
+                int value4 = new Minute(rule).Value;
+                int value5 = new Second(rule).Value;
+
+                Console.WriteLine("s:{0}, m:{1}, h:{2}, d:{3}, M:{4}, Y:{5}", value5, value4, value3, value2, value1, value);
 
                 return new DateTime(
-                    new Year(rule).Value, new Month(rule).Value, new Day(rule).Value,
-                    value, value1, value2
+                    value, value1, value2,
+                    value3, value4, value5
                 );
             }
         }

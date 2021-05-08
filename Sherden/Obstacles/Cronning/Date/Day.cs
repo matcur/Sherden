@@ -24,10 +24,11 @@ namespace Sherden.Obstacles.Cronning.Date
 
         public Day(string rule): base(rule) { }
 
-        public bool IsHourOver(int day)
+        public bool IsHourOver()
         {
-            return new Hour(rule).Value < DateTime.Now.Hour
-                && Now.Day >= day;
+            return new Hour(rule).Value <= Now.Hour &&
+                   new Minute(rule).Value <= Now.Minute &&
+                   new Second(rule).Value <= Now.Second;
         }
     }
 }
