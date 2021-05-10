@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Sherden.Obstacles.Cronning;
 
-namespace Sherden.Obstacles.Cronning
+namespace Sherden.Obstacles
 {
     public class Cron : Obstacle
     {
@@ -22,7 +23,7 @@ namespace Sherden.Obstacles.Cronning
             this.expression = new CronExpression(rule);
         }
 
-        public async override void Activate()
+        public override async void Activate()
         {
             while (true)
             {
