@@ -26,9 +26,9 @@ namespace Sherden
                 )
             );
 
-            new Shedules(
+            new Plan(
                 new List<SimpleSchedule> { schedule }   
-            ).Run();
+            ).Execute();
 
             Console.ReadKey();
         }

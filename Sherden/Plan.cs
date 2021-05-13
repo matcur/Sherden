@@ -4,21 +4,21 @@ using System.Threading.Tasks;
 
 namespace Sherden
 {
-    public class Shedules
+    public class Plan
     {
         private IEnumerable<Schedule> schedules;
 
-        public Shedules(Schedule schedule)
+        public Plan(Schedule schedule)
         {
             schedules = new List<Schedule> { schedule };
         }
 
-        public Shedules(IEnumerable<Schedule> shedules)
+        public Plan(IEnumerable<Schedule> shedules)
         {
             schedules = shedules;
         }
 
-        public Task Run()
+        public Task Execute()
         {
             return Task.Run(() =>
             {
