@@ -4,16 +4,16 @@ using System.Threading.Tasks;
 
 namespace Sherden
 {
-    public class JobQueue
+    public class Shedules
     {
         private IEnumerable<Schedule> schedules;
 
-        public JobQueue(Schedule schedule)
+        public Shedules(Schedule schedule)
         {
             schedules = new List<Schedule> { schedule };
         }
 
-        public JobQueue(IEnumerable<Schedule> shedules)
+        public Shedules(IEnumerable<Schedule> shedules)
         {
             schedules = shedules;
         }

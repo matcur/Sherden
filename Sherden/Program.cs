@@ -26,7 +26,7 @@ namespace Sherden
                 )
             );
 
-            new JobQueue(
+            new Shedules(
                 new List<SimpleSchedule> { schedule }   
             ).Run();
 
