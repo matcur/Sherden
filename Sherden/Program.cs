@@ -18,18 +18,25 @@ namespace Sherden
             var m = DateTime.Now.Minute;
             // s m h dow M dom y
             var cron = $"{s} {m} 1 ? * *";
+            var source = new CancellationTokenSource();
             Console.WriteLine(cron);
             var schedule = new SimplePlan(
-                new Cron(
-                    new Message("hi"),
-                    cron
+                new Repeat(
+                    new Cancellation(
+                        new Message("hi"),
+                        source.Token
+                    ),
+                    2
                 )
             );
-
+    
             new Schedule(
                 new List<SimplePlan> { schedule }   
             ).Execute();
 
+            Console.WriteLine("press key to cancel job");
+            Console.ReadKey();
+            source.Cancel();
             Console.ReadKey();
         }
     }
@@ -45,7 +52,14 @@ namespace Sherden
 
         public void Execute()
         {
+            if (new Random().Next() > 10)
+                Cancel();
             Console.WriteLine(value);
+        }
+
+        protected void Cancel()
+        {
+            
         }
     }
 
