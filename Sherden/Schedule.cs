@@ -1,21 +1,21 @@
-﻿using Sherden.Schedules;
+﻿using Sherden.Plans;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Sherden
 {
-    public class Plan
+    public class Schedule
     {
-        private IEnumerable<Schedule> schedules;
+        private IEnumerable<Plan> schedules;
 
-        public Plan(Schedule schedule)
+        public Schedule(Plan plan)
         {
-            schedules = new List<Schedule> { schedule };
+            schedules = new List<Plan> { plan };
         }
 
-        public Plan(IEnumerable<Schedule> shedules)
+        public Schedule(IEnumerable<Plan> plans)
         {
-            schedules = shedules;
+            schedules = plans;
         }
 
         public Task Execute()

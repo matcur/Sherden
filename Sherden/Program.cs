@@ -1,6 +1,6 @@
 ﻿using Sherden.Obstacles;
 using Sherden.Obstacles.Cronning;
-using Sherden.Schedules;
+using Sherden.Plans;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,15 +19,15 @@ namespace Sherden
             // s m h dow M dom y
             var cron = $"{s} {m} 1 ? * *";
             Console.WriteLine(cron);
-            var schedule = new SimpleSchedule(
+            var schedule = new SimplePlan(
                 new Cron(
                     new Message("hi"),
                     cron
                 )
             );
 
-            new Plan(
-                new List<SimpleSchedule> { schedule }   
+            new Schedule(
+                new List<SimplePlan> { schedule }   
             ).Execute();
 
             Console.ReadKey();

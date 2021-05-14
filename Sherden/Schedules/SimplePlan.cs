@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sherden.Schedules
+namespace Sherden.Plans
 {
-    public class SimpleSchedule : Schedule
+    public class SimplePlan : Plan
     {
         public Obstacle Obstacle { get; }
 
-        public SimpleSchedule(Obstacle obstacle)
+        public SimplePlan(Obstacle obstacle)
         {
             Obstacle = obstacle;
         }

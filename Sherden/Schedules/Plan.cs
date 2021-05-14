@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sherden.Schedules
+namespace Sherden.Plans
 {
-    public interface Schedule
+    public interface Plan
     {
         void Execute();
     }
